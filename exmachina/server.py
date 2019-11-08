@@ -7,7 +7,7 @@ from .protocol import send, recv
 class SocketFileServer(Thread):
 
     def __init__(self, socket_file, locals):
-        super().__init__()
+        super().__init__(daemon=True)
         self.locals = locals
         self.socket = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
         self.socket.bind(socket_file)
