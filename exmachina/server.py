@@ -1,5 +1,6 @@
 
 from threading import Thread
+from pathlib import Path
 import socket
 
 from .protocol import send, recv
@@ -11,6 +12,7 @@ class SocketFileServer(Thread):
         self.locals = locals
         self.socket = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
         self.socket.bind(socket_file)
+        Path(socket_file).chmod(0o700)
 
     def eval_exec(self, line):
         try:
